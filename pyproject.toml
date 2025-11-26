@@ -1,0 +1,33 @@
+[project]
+name = "altlissiauto"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Thehunter101",email = "thehunter121@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "selenium (>=4.35.0,<5.0.0)",
+    "undetected-chromedriver (>=3.5.5,<4.0.0)",
+    "setuptools (>=80.9.0,<81.0.0)",
+    "pyperclip (>=1.11.0,<2.0.0)",
+]
+
+[tool.poetry]
+packages = [{include = "altlissiauto", from = "src"}]
+
+[tool.poetry.scripts]
+dev = "altlissiauto.__main__:main"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "jedi (>=0.19.2,<0.20.0)",
+    "black (>=25.9.0,<26.0.0)",
+    "types-selenium (>=3.141.9,<4.0.0)",
+    "pyright (>=1.1.405,<2.0.0)"
+]
