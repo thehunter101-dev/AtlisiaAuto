@@ -44,21 +44,30 @@ def Stage(driver, wait,test):
                         )
                     )
                 )
-                print(btn_valid)
+                #print(btn_valid)
                 if second_vuelta:
                     if len(resultado[i]) >= 2 and isinstance(resultado[i], list):
-                        print("Te inserto mas de 2 hijos weeeee")
                         InsertMoreResult(wait,resultado[i])
                     else:
-                        inpu_t = wait.until(
-                            EC.visibility_of_element_located(
-                                (
-                                    By.XPATH,
-                                    '//*[@id="theme-provider"]/div/main/div/div[2]/div/p/input',
+                        try:
+                            inpu_t = wait.until(
+                                EC.visibility_of_element_located(
+                                    (
+                                        By.XPATH,
+                                        '//*[@id="theme-provider"]/div/main/div/div[2]/div/p/input',
+                                    )
                                 )
                             )
-                        )
-                        inpu_t.send_keys(resultado[i])
+                            inpu_t.send_keys(resultado[i])
+                        except:
+                            if isinstance(resultado[i],str):
+                                btn_correct = wait.until(
+                                    EC.element_to_be_clickable(
+                                        (By.XPATH, f"""//ul[contains(@class,'c-gUbZqN')]//button[normalize-space()="{resultado[i]}"]""")
+                                    )
+                                )
+                                btn_correct.click()
+                                
                     btn_valid.click()
 
                 if not validate and not second_vuelta:
@@ -76,18 +85,24 @@ def Stage(driver, wait,test):
                     )
 
                     if len(respuestas) >= 2:
-                        print("Mas de dos hijos weeeee")
                         resultados = SafeMoreResult(wait, respuestas)
                         resultado.append(resultados)
                     else:
-                        respuesta = wait.until(
-                            EC.visibility_of_element_located(
-                                (
-                                    By.CSS_SELECTOR,
-                                    'span.c-gUxMKR.c-gUxMKR-bkfbUO-isCorrect-true',
+                        try:
+                            respuesta = wait.until(
+                               EC.visibility_of_element_located(
+                                    (By.CSS_SELECTOR,'p.c-cFbiKG.c-cFbiKG-eNHmlz-isCorrect-true') 
+                               ) 
+                            )
+                        except:
+                            respuesta = wait.until(
+                                EC.visibility_of_element_located(
+                                    (
+                                        By.CSS_SELECTOR,
+                                        'span.c-gUxMKR.c-gUxMKR-bkfbUO-isCorrect-true',
+                                    )
                                 )
                             )
-                        )
                         resultado.append(respuesta.text)
                 else:
                     btn_valid.click()

@@ -17,8 +17,22 @@ def InsertMoreResult(wait, respuestas):
     )
 
     hijos_input = input_container_padre.find_elements(By.CSS_SELECTOR,'input.c-iJOJc')
-    print(len(hijos_input))
-    print(len(respuestas))
+    if len(hijos_input) != 0:
+        for i in range(len(respuestas)):
+            hijos_input[i].send_keys(respuestas[i])
+    else:
+        for i in respuestas:
+            btn_correct = wait.until(
+                EC.element_to_be_clickable(
+                    (By.XPATH, f"//ul[contains(@class,'c-gUbZqN')]//button[normalize-space()='{i}']")
+                )
+            )
+            btn_correct.click()
 
-    for i in range(len(respuestas)):
-        hijos_input[i].send_keys(respuestas[i])
+def ordenar_frase(frase, partes):
+    partes_ordenadas = sorted(
+        partes,
+        key=lambda x: frase.find(x)
+    )
+
+    return partes_ordenadas
