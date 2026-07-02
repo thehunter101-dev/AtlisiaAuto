@@ -38,13 +38,12 @@ def Stage(driver, wait,test):
             two_result = False
             for inner in range(pasadas_validate):
                 btn_valid = wait.until(
-                    EC.element_to_be_clickable(
-                        (
-                            By.CSS_SELECTOR,'button.c-lfgsZH.c-PJLV.c-jUtMbh',
-                        )
-                    )
+                    EC.element_to_be_clickable((
+                        By.XPATH,
+                        "//button[.//text()[contains(., 'Validar') or contains(., 'Validate') or contains(., 'Continue')]]"
+                    ))
                 )
-                #print(btn_valid)
+                print(btn_valid)
                 if second_vuelta:
                     if len(resultado[i]) >= 2 and isinstance(resultado[i], list):
                         InsertMoreResult(wait,resultado[i])
@@ -71,7 +70,9 @@ def Stage(driver, wait,test):
                     btn_valid.click()
 
                 if not validate and not second_vuelta:
+
                     btn_valid.click()
+
                     validate = True
 
                     padre_container_result = wait.until(
@@ -95,17 +96,35 @@ def Stage(driver, wait,test):
                                ) 
                             )
                         except:
-                            respuesta = wait.until(
+                            try:
+                                respuesta = wait.until(
+                                    EC.visibility_of_element_located(
+                                        (
+                                            By.CSS_SELECTOR,
+                                            'span.c-gUxMKR.c-gUxMKR-bkfbUO-isCorrect-true',
+                                        )
+                                    )
+                                )
+                            except:
+                                respuesta = wait.until(
                                 EC.visibility_of_element_located(
                                     (
                                         By.CSS_SELECTOR,
-                                        'span.c-gUxMKR.c-gUxMKR-bkfbUO-isCorrect-true',
+                                        'p.c-knMLyP.c-knMLyP-eNHmlz-isCorrect-true',
+                                        )
                                     )
                                 )
-                            )
                         resultado.append(respuesta.text)
+
+
                 else:
-                    btn_valid.click()
+                    btn_continue = wait.until(
+                        EC.element_to_be_clickable(
+                            (By.XPATH, "//button[normalize-space()='Continue']")
+                        )
+                    )
+                    print(btn_continue)
+                    btn_continue.click()
 
         pasadas_validate = 1
         second_vuelta = True

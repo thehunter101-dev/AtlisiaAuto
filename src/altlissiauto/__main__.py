@@ -12,8 +12,8 @@ from .login import Login
 from .test_stage import Stage
 
 def main():
-    driver = uc.Chrome(version_main=140)
-    wait = WebDriverWait(driver, 10)
+    driver = uc.Chrome(version_main=147)
+    wait = WebDriverWait(driver, 6)
 
     usuarioStr:str = "mmurciab@unemi.edu.ec"
     contrasenaStr:str = "1751707280"
@@ -21,17 +21,20 @@ def main():
     test = pyperclip.paste()
 
     Urls = [
-        "https://aprender.altissia.org/platform/learning-path/mission/GOING_TO_THE_RESTAURANT/lesson/EN_GB_A2_GRAMMAR_WILL_FOR_OFFERS_DECISIONS/activity/EN_GB_A2_GRAMMAR_WILL_FOR_OFFERS_DECISIONS_EXERCISE_MEANING_ACTIVITY_2?studyLg=en_GB",
-        "https://aprender.altissia.org/platform/learning-path/mission/GOING_TO_THE_RESTAURANT/lesson/EN_GB_A2_GRAMMAR_WILL_FOR_OFFERS_DECISIONS/activity/EN_GB_A2_GRAMMAR_WILL_FOR_OFFERS_DECISIONS_EXERCISE_FORM_ACTIVITY_1?studyLg=en_GB",
-        "https://aprender.altissia.org/platform/learning-path/mission/GOING_TO_THE_RESTAURANT/lesson/EN_GB_A2_GRAMMAR_WILL_FOR_OFFERS_DECISIONS/activity/EN_GB_A2_GRAMMAR_WILL_FOR_OFFERS_DECISIONS_EXERCISE_FORM_ACTIVITY_2?studyLg=en_GB",
-        "https://aprender.altissia.org/platform/learning-path/mission/GOING_TO_THE_RESTAURANT/lesson/EN_GB_A2_GRAMMAR_WILL_FOR_OFFERS_DECISIONS/activity/EN_GB_A2_GRAMMAR_WILL_FOR_OFFERS_DECISIONS_EXERCISE_PRACTICE_ACTIVITY_1?studyLg=en_GB",
-        "https://aprender.altissia.org/platform/learning-path/mission/GOING_TO_THE_RESTAURANT/lesson/EN_GB_A2_GRAMMAR_WILL_FOR_OFFERS_DECISIONS/activity/EN_GB_A2_GRAMMAR_WILL_FOR_OFFERS_DECISIONS_EXERCISE_PRACTICE_ACTIVITY_2?studyLg=en_GB",
-        "https://aprender.altissia.org/platform/learning-path/mission/GOING_TO_THE_RESTAURANT/lesson/EN_GB_A2_GRAMMAR_WILL_FOR_OFFERS_DECISIONS/activity/EN_GB_A2_GRAMMAR_WILL_FOR_OFFERS_DECISIONS_EXERCISE_PRACTICE_ACTIVITY_3?studyLg=en_GB",
+        "https://aprender.altissia.org/platform/learning-path/mission/DECIDING_HOW_TO_TRAVEL/lesson/EN_GB_B1_GRAMMAR_PRESENT_SIMPLE_PRESENT_CONTINUOUS_GOING_TO_AND_WILL_FOR_FUTURE/activity/EN_GB_B1_GRAMMAR_PRESENT_SIMPLE_PRESENT_CONTINUOUS_GOING_TO_AND_WILL_FOR_FUTURE_EXERCISE_MEANING_ACT?customer=ECUADOR_EPUNEMI_2025",
+        "https://aprender.altissia.org/platform/learning-path/mission/DECIDING_HOW_TO_TRAVEL/lesson/EN_GB_B1_GRAMMAR_PRESENT_SIMPLE_PRESENT_CONTINUOUS_GOING_TO_AND_WILL_FOR_FUTURE/activity/EN_GB_B1_GRAMMAR_PRESENT_SIMPLE_PRESENT_CONTINUOUS_GOING_TO_AND_WILL_FOR_FUTURE_EXERCISE_MEANING_A_2?customer=ECUADOR_EPUNEMI_2025",
+        "https://aprender.altissia.org/platform/learning-path/mission/DECIDING_HOW_TO_TRAVEL/lesson/EN_GB_B1_GRAMMAR_PRESENT_SIMPLE_PRESENT_CONTINUOUS_GOING_TO_AND_WILL_FOR_FUTURE/activity/EN_GB_B1_GRAMMAR_PRESENT_SIMPLE_PRESENT_CONTINUOUS_GOING_TO_AND_WILL_FOR_FUTURE_EXERCISE_FORM_ACTIVI?customer=ECUADOR_EPUNEMI_2025",
+        "https://aprender.altissia.org/platform/learning-path/mission/DECIDING_HOW_TO_TRAVEL/lesson/EN_GB_B1_GRAMMAR_PRESENT_SIMPLE_PRESENT_CONTINUOUS_GOING_TO_AND_WILL_FOR_FUTURE/activity/EN_GB_B1_GRAMMAR_PRESENT_SIMPLE_PRESENT_CONTINUOUS_GOING_TO_AND_WILL_FOR_FUTURE_EXERCISE_FORM_ACTI_2?customer=ECUADOR_EPUNEMI_2025",
+        "https://aprender.altissia.org/platform/learning-path/mission/DECIDING_HOW_TO_TRAVEL/lesson/EN_GB_B1_GRAMMAR_PRESENT_SIMPLE_PRESENT_CONTINUOUS_GOING_TO_AND_WILL_FOR_FUTURE/activity/EN_GB_B1_GRAMMAR_PRESENT_SIMPLE_PRESENT_CONTINUOUS_GOING_TO_AND_WILL_FOR_FUTURE_EXERCISE_PRACTICE_AC?customer=ECUADOR_EPUNEMI_2025",
+        "",
+        "",
+        "",
+        "",
     ]
     Login(driver,wait,usuarioStr,contrasenaStr)
     #Stage(driver,wait,test)
     for url in Urls:
         try:
             Stage(driver,wait,url)
-        except TimeoutException:
-            print("JAjajaj")
+        except:
+            print("AAAAAAA")

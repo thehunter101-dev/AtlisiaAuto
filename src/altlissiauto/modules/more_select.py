@@ -1,6 +1,14 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import time
+def xpath_safe_text(text):
+    if "'" not in text:
+        return f"'{text}'"
+    if '"' not in text:
+        return f'"{text}"'
+
+    parts = text.split("'")
+    return "concat(" + ", \"'\", ".join(f"'{p}'" for p in parts) + ")"
 
 def SafeMoreResult(wait, respuestas):
     resultadosList = []
@@ -22,9 +30,13 @@ def InsertMoreResult(wait, respuestas):
             hijos_input[i].send_keys(respuestas[i])
     else:
         for i in respuestas:
+            safe_text = xpath_safe_text(i)
             btn_correct = wait.until(
                 EC.element_to_be_clickable(
-                    (By.XPATH, f"//ul[contains(@class,'c-gUbZqN')]//button[normalize-space()='{i}']")
+                    (
+                        By.XPATH,
+                        f"//ul[contains(@class,'c-gUbZqN')]//button[normalize-space()={safe_text}]",
+                    )
                 )
             )
             btn_correct.click()

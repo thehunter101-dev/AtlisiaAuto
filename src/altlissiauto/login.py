@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 def Login(driver,wait, usuarioStr, contrasenaStr):
@@ -12,7 +13,10 @@ def Login(driver,wait, usuarioStr, contrasenaStr):
     contrasena = driver.find_element(By.ID, "password")
     contrasena.send_keys(contrasenaStr)
 
-    boton_login = driver.find_element(By.CSS_SELECTOR, "button.c-lfgsZH")
+    boton_login = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//button[normalize-space()='Log in']"))
+    )
+
     boton_login.click()
 
     wait.until(
